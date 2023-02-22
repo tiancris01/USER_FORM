@@ -1,6 +1,7 @@
-import 'package:dv_technical_assessment/views/form_page.dart';
-import 'package:dv_technical_assessment/views/users_view_page.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/form_page.dart';
+import 'widgets/users_view_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Double V Technical assessment',
-      initialRoute: 'usersPage',
+      initialRoute: 'formPage',
       routes: {
         'usersPage': (_) => UsersPage(),
         'formPage': (_) => FormPage(),
