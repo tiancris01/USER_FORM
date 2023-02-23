@@ -16,9 +16,6 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      /* providers: [
-        ChangeNotifierProvider(create: (_) => UserStateNotifier()),
-      ], */
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Double V Technical assessment',
@@ -26,7 +23,6 @@ class AppWidget extends StatelessWidget {
         routes: {
           'home': (_) => HomePage(),
           'usersPage': (_) => UsersPage(),
-          'formPage': (_) => FormDialog(),
         },
       ),
     );

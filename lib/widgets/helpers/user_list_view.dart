@@ -17,11 +17,10 @@ class UserListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final userState = Provider.of<UserStateNotifier>(context);
     final userState = ref.watch(userStateRiverpod);
 
     return ListView.builder(
-      itemCount: /* userState.getUsers().length  */ users.length,
+      itemCount: users.length,
       itemBuilder: (_, i) {
         return Card(
           color: Colors.blueGrey[50],
@@ -47,34 +46,30 @@ class UserListView extends ConsumerWidget {
                 icon: const Icon(Icons.add),
               ),
               leading: CircleAvatar(
-                child: Text(
-                    /* '${userState.getUsers()[i].age}' */ '${users[i].age}'),
+                child: Text('${users[i].age}'),
               ),
-              title: Text(
-                  '${users[i].name} ' /* '${userState.getUsers()[i].name} ' */
-                  '${users[i].lastName}' /* '${userState.getUsers()[i].lastName}' */),
-              children: /* userState
-                  .getUsers()[i] */
-                  users[i]
-                      .address
-                      .map(
-                        (e) => Column(
-                          children: [
-                            ListTile(
-                              trailing: IconButton(
-                                  onPressed: () {
-                                    ref
-                                        .read(userStateRiverpod)
-                                        .removeAdress(users[i], e);
-                                  },
-                                  icon: const Icon(Icons.delete)),
-                              title: Text(e),
-                            ),
-                            const Divider(height: 1)
-                          ],
+              title: Text('${users[i].name} '
+                  '${users[i].lastName}'),
+              children: users[i]
+                  .address
+                  .map(
+                    (e) => Column(
+                      children: [
+                        ListTile(
+                          trailing: IconButton(
+                              onPressed: () {
+                                ref
+                                    .read(userStateRiverpod)
+                                    .removeAdress(users[i], e);
+                              },
+                              icon: const Icon(Icons.delete)),
+                          title: Text(e),
                         ),
-                      )
-                      .toList(),
+                        const Divider(height: 1)
+                      ],
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         );

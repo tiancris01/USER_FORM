@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../helpers/custom_buttom.dart';
-
 const Duration duration = Duration(seconds: 3);
 
 class HomePage extends StatefulWidget {
@@ -40,13 +38,7 @@ class _HomePageState extends State<HomePage> {
                   child: Image.asset('assets/image.png'),
                 );
               },
-              // padding: const EdgeInsets.only(bottom: 20),
-              // width: 200,
-              // height: 200,
             ),
-            // const CustomButton(title: "Users"),
-            // const CustomButton(title: "BloC"),
-            // const CustomButton(title: "Riverpad"),
           ],
         ),
       ),

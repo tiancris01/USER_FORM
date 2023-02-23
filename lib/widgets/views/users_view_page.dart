@@ -1,11 +1,9 @@
-import '../helpers/custom_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 import '../../main.dart';
 import '../../models/user.dart';
-import '../../services/user_state_notifier.dart';
+import '../helpers/custom_form.dart';
 import '../helpers/no_user_created_message.dart';
 import '../helpers/user_list_view.dart';
 
@@ -14,9 +12,7 @@ class UsersPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<User> users;
     final userState = ref.watch(userStateRiverpod);
-    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -29,10 +25,7 @@ class UsersPage extends ConsumerWidget {
           if (!userState.existUser) {
             return const NoUserCreatedMessage();
           } else {
-            return UserListView(
-                users: ref
-                    .read(userStateRiverpod)
-                    .getUsers() /* userState.getUsers() */);
+            return UserListView(users: ref.read(userStateRiverpod).getUsers());
           }
         },
       ),
@@ -50,7 +43,7 @@ class UsersPage extends ConsumerWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("USER FORM"),
+          title: const Text("USER FORM"),
           content: FormDialog(),
         );
       },

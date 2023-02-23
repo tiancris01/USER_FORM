@@ -1,7 +1,5 @@
-import 'package:dv_technical_assessment/services/user_state_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 import '../../main.dart';
 import '../../models/user.dart';
@@ -19,8 +17,6 @@ class FormDialog extends ConsumerWidget {
     late int age;
     final List<String> listAddress = <String>[];
     final userState = ref.watch(userStateRiverpod);
-
-    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Form(
       key: formKey,
@@ -49,9 +45,7 @@ class FormDialog extends ConsumerWidget {
               isAdress: true,
               title: "Address",
               keyboardType: TextInputType.name,
-              onSave: (value) =>
-                  listAddress.add(value!) /* userState.listAddress = value!, */
-              ),
+              onSave: (value) => listAddress.add(value!)),
           const SizedBox(height: 10.0),
           ElevatedButton(
             onPressed: () {
@@ -88,8 +82,6 @@ class FormDialogAdress extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     late String address;
     final userState = ref.watch(userStateRiverpod);
-
-    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Form(
       key: formKeyAddress,
