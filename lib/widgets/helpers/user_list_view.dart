@@ -25,9 +25,19 @@ class UserListView extends ConsumerWidget {
       itemBuilder: (_, i) {
         return Card(
           color: Colors.blueGrey[50],
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           child: Dismissible(
             key: UniqueKey(),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              child: const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Delete user  ",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
             child: ExpansionTile(
               backgroundColor: Colors.white,
               trailing: IconButton(
@@ -77,7 +87,7 @@ class UserListView extends ConsumerWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("NEW ADDRESS"),
+          title: const Text("NEW ADDRESS"),
           content: FormDialogAdress(
             user: user,
           ),
