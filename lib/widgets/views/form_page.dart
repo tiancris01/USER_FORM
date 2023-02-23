@@ -1,5 +1,6 @@
 import 'package:dv_technical_assessment/services/user_state_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/user.dart';
 import '../helpers/text_form_field.dart';
@@ -19,7 +20,10 @@ class _FormDialogState extends State<FormDialog> {
     late String lastName;
     late int age;
     final List<String> address = <String>[];
-    // UserStateNotifier userStateNotifier = UserStateNotifier.instance;
+    late String address2;
+
+    final userState = Provider.of<UserStateNotifier>(context);
+
     return Form(
       key: formKey,
       child: Column(
@@ -56,8 +60,7 @@ class _FormDialogState extends State<FormDialog> {
                 formKey.currentState?.save();
                 User user = User(
                     lastName: lastName, name: name, age: age, address: address);
-                // userStateNotifier.saveUser = user;
-                ;
+                userState.saveUser = user;
                 Navigator.pop(context);
               }
             },

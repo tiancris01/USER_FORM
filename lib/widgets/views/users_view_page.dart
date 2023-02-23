@@ -19,9 +19,6 @@ class _UsersPageState extends State<UsersPage> {
   Widget build(BuildContext context) {
     List<User> users;
     final userState = Provider.of<UserStateNotifier>(context);
-    // UserStateNotifier userStateNotifier = UserStateNotifier.instance;
-
-    // users = userStateNotifier.getUser();
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +29,7 @@ class _UsersPageState extends State<UsersPage> {
           if (!userState.existUser) {
             return const NoUserCreatedMessage();
           } else {
-            return UserListView(users: userState.getUser());
+            return UserListView(users: userState.getUsers());
           }
         },
       ),
