@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+import '../helpers/custom_buttom.dart';
+
+const Duration duration = Duration(seconds: 3);
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  initState() {
+    _navigate();
+    super.initState();
+  }
+
+  _navigate() async {
+    await Future.delayed(duration);
+    Navigator.pushNamed(context, "usersPage");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,37 +30,24 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.only(bottom: 20),
-              width: 200,
-              height: 200,
-              child: const Placeholder(),
+            TweenAnimationBuilder(
+              curve: Curves.easeInOutSine,
+              duration: duration,
+              tween: Tween<double>(begin: 0, end: 1),
+              builder: (_, double value, __) {
+                return Opacity(
+                  opacity: value,
+                  child: Image.asset('assets/image.png'),
+                );
+              },
+              // padding: const EdgeInsets.only(bottom: 20),
+              // width: 200,
+              // height: 200,
             ),
-            const CustomButton(title: "Provider"),
-            const CustomButton(title: "BloC"),
-            const CustomButton(title: "Riverpad"),
+            // const CustomButton(title: "Users"),
+            // const CustomButton(title: "BloC"),
+            // const CustomButton(title: "Riverpad"),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      child: Container(
-        child: ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, "usersPage"),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 20),
-          ),
         ),
       ),
     );

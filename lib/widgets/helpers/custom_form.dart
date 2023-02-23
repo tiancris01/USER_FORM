@@ -1,27 +1,26 @@
 import 'package:dv_technical_assessment/services/user_state_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../../models/user.dart';
 import 'text_form_field.dart';
 
-class FormDialog extends StatefulWidget {
-  const FormDialog({super.key});
+class FormDialog extends ConsumerWidget {
+  FormDialog({super.key});
 
-  @override
-  State<FormDialog> createState() => _FormDialogState();
-}
-
-class _FormDialogState extends State<FormDialog> {
   final formKey = GlobalKey<FormState>();
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     late String name;
     late String lastName;
     late int age;
     final List<String> listAddress = <String>[];
+    final userState = ref.watch(userStateRiverpod);
 
-    final userState = Provider.of<UserStateNotifier>(context);
+    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Form(
       key: formKey,
@@ -64,7 +63,7 @@ class _FormDialogState extends State<FormDialog> {
                   age: age,
                   address: listAddress,
                 );
-                userState.saveUsers(user);
+                ref.read(userStateRiverpod).saveUsers(user);
                 Navigator.pop(context);
               }
             },
@@ -76,24 +75,21 @@ class _FormDialogState extends State<FormDialog> {
   }
 }
 
-class FormDialogAdress extends StatefulWidget {
+class FormDialogAdress extends ConsumerWidget {
   final User user;
-  const FormDialogAdress({
+  FormDialogAdress({
     super.key,
     required this.user,
   });
 
-  @override
-  State<FormDialogAdress> createState() => _FormDialogAdressState();
-}
-
-class _FormDialogAdressState extends State<FormDialogAdress> {
   final formKeyAddress = GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context) {
-    late String address;
 
-    final userState = Provider.of<UserStateNotifier>(context);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    late String address;
+    final userState = ref.watch(userStateRiverpod);
+
+    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Form(
       key: formKeyAddress,
@@ -113,7 +109,7 @@ class _FormDialogAdressState extends State<FormDialogAdress> {
             onPressed: () {
               if (formKeyAddress.currentState?.validate() == true) {
                 formKeyAddress.currentState?.save();
-                userState.listAddress(widget.user, address);
+                ref.read(userStateRiverpod).listAddress(user, address);
                 Navigator.pop(context);
               }
             },

@@ -1,50 +1,55 @@
-import 'package:dv_technical_assessment/widgets/helpers/custom_form.dart';
+import '../helpers/custom_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../../models/user.dart';
 import '../../services/user_state_notifier.dart';
 import '../helpers/no_user_created_message.dart';
 import '../helpers/user_list_view.dart';
 
-class UsersPage extends StatefulWidget {
+class UsersPage extends ConsumerWidget {
   const UsersPage({super.key});
 
   @override
-  State<UsersPage> createState() => _UsersPageState();
-}
-
-class _UsersPageState extends State<UsersPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List<User> users;
-    final userState = Provider.of<UserStateNotifier>(context);
+    final userState = ref.watch(userStateRiverpod);
+    // final userState = Provider.of<UserStateNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Users"),
+        leading: Container(),
+        centerTitle: true,
+        title: const Text("USERS"),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (!userState.existUser) {
             return const NoUserCreatedMessage();
           } else {
-            return UserListView(users: userState.getUsers());
+            return UserListView(
+                users: ref
+                    .read(userStateRiverpod)
+                    .getUsers() /* userState.getUsers() */);
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showDialog,
+        onPressed: () {
+          _showDialog(context);
+        },
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  _showDialog() {
+  _showDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
+        return AlertDialog(
           title: Text("USER FORM"),
           content: FormDialog(),
         );
