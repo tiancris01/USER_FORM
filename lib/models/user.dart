@@ -8,7 +8,7 @@ class User {
     required this.name,
     required this.lastName,
     required this.age,
-    required this.address,
+    this.address = const <String>[],
   });
 
   User copyWith({

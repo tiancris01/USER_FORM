@@ -3,7 +3,7 @@ import 'package:dv_technical_assessment/widgets/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/views/form_page.dart';
+import 'widgets/helpers/custom_form.dart';
 import 'widgets/views/users_view_page.dart';
 
 void main() => runApp(AppWidget());

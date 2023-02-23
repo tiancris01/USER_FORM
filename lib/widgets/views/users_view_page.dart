@@ -1,4 +1,4 @@
-import 'package:dv_technical_assessment/widgets/views/form_page.dart';
+import 'package:dv_technical_assessment/widgets/helpers/custom_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

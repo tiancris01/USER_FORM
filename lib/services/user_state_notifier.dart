@@ -4,28 +4,28 @@ import '../models/user.dart';
 
 class UserStateNotifier with ChangeNotifier {
   final List<User> _users = <User>[];
+
+  final List<String> _listAddress = <String>[];
   late User _user;
 
-  set saveUser(User user) {
-    this._users.add(user);
+  void saveUsers(User user) {
+    _users.add(user);
     notifyListeners();
   }
 
-  set address(String address) {
-    _user.address.add(address);
+  void listAddress(User user, String address) {
+    user.address.add(address) /* _listAddress.add(address) */;
     notifyListeners();
   }
 
-  void removeAdress(String address) {
-    _user.address.remove(address);
+  List<String> getListAddress() => _listAddress;
+
+  void removeAdress(User user, String address) {
+    user.address.remove(address) /* _listAddress.add(address) */;
     notifyListeners();
   }
 
-  List<User> getUsers() => this._users;
-  bool get existUser => (this.getUsers().isNotEmpty) ? true : false;
+  List<User> getUsers() => _users;
 
-  User get user => _user;
-  set age(int age) => _user.copyWith(age: age);
-  set name(String name) => _user.copyWith(name: name);
-  set lastName(String lastName) => _user.copyWith(lastName: lastName);
+  bool get existUser => (getUsers().isNotEmpty) ? true : false;
 }
